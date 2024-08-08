@@ -25,6 +25,8 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
 }
 
 .product-card img {
@@ -47,6 +49,7 @@ body {
     padding: 10px 0;
     text-align: center;
     color: #555;
+    flex-grow: 1;
 }
 
 .product-card span {

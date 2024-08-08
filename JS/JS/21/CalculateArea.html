@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Area</title>
+    <style>
+        .area{
+            width: 400px;
+            height:400px;
+            background-color: rgb(204, 246, 232);
+            display: flex;
+            flex-direction: column;
+            margin-left: 40%;
+            border-radius: 8px;
+        }
+        button{
+            margin-top: 10px;
+        }
+        .areadisplay{
+            margin-top: 20px;
+            margin-left:42%;
+        }
+        h3{
+            margin-left: 48%;
+        }
+      input[type="text"]{
+         height: 40px;
+        }
+        #calculateButton{
+           height: 40px;
+            color: black;
+            background-color: aquamarine;
+        }
+    </style>
+</head>
+<body>
+    <h3>Calculate Area</h3>
+    <div class="area">
+        <label>Width:</label>
+        <input type="text" id="width">
+        <label>Height:</label>
+        <input type="text" id="height">
+        <button id="calculateButton">Calculate Area</button>
+        <div class="areadisplay" id="areaDisplay"></div>
+    </div>
+    <script src="./CalculateArea.js"></script>
+</body>
+</html>
