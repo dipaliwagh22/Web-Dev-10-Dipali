@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Mathematical Operations</title>
+   <style>
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    text-align: center;
+    background-color: #686565;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+input[type="number"] {
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: calc(100% - 22px);
+    font-size: 16px;
+}
+
+.button-container {
+    margin-bottom: 20px;
+}
+
+button {
+    margin: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: rgb(49, 48, 48);
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #88e6f4;
+}
+
+#result {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+   </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Simple Mathematical Operations</h1>
+        <p>Enter a number and select an operation:</p>
+        <input type="number" id="userInput" placeholder="Enter a number">
+        <div class="button-container">
+            <button id="doubleBtn">Double Number</button>
+            <button id="squareBtn">Square Number</button>
+            <button id="incrementBtn">Increment Number</button>
+        </div>
+        <p id="result"></p>
+    </div>
+
+    <script src="math.js"></script>
+</body>
+</html>

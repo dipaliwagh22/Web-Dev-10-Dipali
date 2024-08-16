@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculate Painting Cost</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #858587;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        input[type="number"] {
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: calc(50% - 22px);
+            font-size: 16px;
+            margin-right: 10px;
+        }
+
+        .button-container {
+            margin-bottom: 20px;
+        }
+
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #72cff1;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #74dff7;
+        }
+        
+        #result {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Calculate Painting Cost</h1>
+        <p>Enter dimensions and select a shape to calculate the painting cost:</p>
+        <input type="number" id="dimension1" placeholder="Enter first dimension">
+        <input type="number" id="dimension2" placeholder="Enter second dimension">
+        <div class="button-container">
+            <button id="rectangleBtn">Calculate for Rectangle</button>
+            <button id="circleBtn">Calculate for Circle</button>
+            <button id="triangleBtn">Calculate for Triangle</button>
+        </div>
+        <p id="result"></p>
+    </div>
+    <script src="painting.js"></script>
+</body>
+</html>

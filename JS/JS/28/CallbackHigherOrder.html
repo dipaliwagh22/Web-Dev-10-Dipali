@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Higher-Order Functions and Callbacks Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            width: 200px;
+            margin-left: 25%;
+            background-color: rgb(78, 164, 240);
+            border: none;
+            outline: none;
+            cursor: pointer;
+            color: white;
+        }
+        .main{
+            display: flex;
+           gap: 50px;
+           justify-content: center;
+            background-color: rgb(122, 196, 249);
+        }
+        .container{
+            margin-top: 15px;
+            display: flex;
+            flex-direction: column;
+            height: 400px;
+            width: 400px;
+            background-color: aliceblue;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        #result,#result1{
+            margin-top: 20px;
+            font-size: 18px;
+            margin-left: 25%;
+        }
+        h3{
+            display: flex;
+            justify-content: center;
+        }
+        #numInput,#num1,#num2,label{
+           margin-top: 8px;
+           width: 200px;
+          margin-left: 25%;
+          color: rgb(14, 93, 154);
+        }
+    </style>
+</head>
+<body>
+    <h3>By using Higher-Order function callbackfunction</h3>
+    <div class="main">
+        <div class="container">
+            <label for="numInput">Enter a number:</label>
+            <input type="number" id="numInput" placeholder="Enter a number" />
+            <button id="squareButton">Square the Number</button>
+            <div id="result"></div>
+        </div>
+        <div class="container">
+            <label for="num1">Enter first number:</label>
+            <input type="number" id="num1" placeholder="Enter first number" />
+            <label for="num2">Enter second number:</label>
+            <input type="number" id="num2" placeholder="Enter second number" />
+            <button id="addButton">Add Numbers</button>
+            <div id="result1"></div>
+        </div>
+    </div>
+    
+    <script>
+        // a - Higher-order function to square a number
+        const higherOrderFunction = (num, callback) => {
+            return callback(num);
+        };
+
+        // b - Callback function to log the square of a number
+        const callback = (num) => {
+            return num * num;
+        };
+
+        // Event listener for square button
+        document.getElementById('squareButton').addEventListener('click', function() {
+            const num = parseFloat(document.getElementById('numInput').value);
+            if (!isNaN(num)) {
+                const result = Dipali(num, callback);
+                document.getElementById('result').innerText = `Square of ${num} is ${result}`;
+            } else {
+                document.getElementById('result').innerText = 'Please enter a valid number';
+            }
+        });
+
+        // e - Higher-order function to add two numbers
+        const newHigherOrderFunction = (num1, num2, callback) => {
+            return callback(num1, num2);
+        };
+
+        // Event listener for add button
+        document.getElementById('addButton').addEventListener('click', function() {
+            const num1 = parseFloat(document.getElementById('num1').value);
+            const num2 = parseFloat(document.getElementById('num2').value);
+            if (!isNaN(num1) && !isNaN(num2)) {
+                newHigherOrderFunction(num1, num2, function(num1, num2) {
+                    document.getElementById('result1').innerText = `Sum of ${num1} and ${num2} is ${num1 + num2}`;
+                });
+            } else {
+                document.getElementById('result1').innerText = 'Please enter valid numbers';
+            }
+        });
+    </script>
+
+</body>
+</html>
