@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Average Age Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .main {
+            max-width: 500px;
+            height: 300px;
+            margin-left: 35%;
+            background-color: rgb(117, 120, 120);
+            padding: 20px;
+            border-radius: 8px;
+        }
+        button {
+            padding: 10px;
+            margin-top: 10px;
+            background-color: rgb(55, 54, 54);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: rgb(45, 44, 44);
+        }
+        #result {
+            margin-top: 10px;
+            color: white;
+        }
+        input {
+    
+            padding: 10px;
+            border-radius: 4px;
+            border: none;
+            width: calc(100% - 40px);
+        }
+        h2 {
+            text-align: center;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<div class="main">
+    <h2>Calculate Average Age</h2>
+    <input type="text" id="ageInput" placeholder="Enter ages (e.g., 21, 20, 22, 19)">
+    <button onclick="calculateAverageAge()">Calculate</button>
+    <div id="result"></div>
+</div>
+
+<script>
+    function calculateAverageAge() {
+        const input = document.getElementById("ageInput").value;
+        const ages = input.split(',').map(age => age.trim()).map(Number);
+        let totalAge = 0;
+        let validAges = true;
+
+        const allPositive = ages.every(age => !isNaN(age) && age > 0);
+
+        if (allPositive && ages.length > 0) {
+            ages.forEach(age => {
+                totalAge += age;
+            });
+            const averageAge = totalAge / ages.length;
+            document.getElementById("result").textContent = "Average Age: " + averageAge.toFixed(2);
+        } else {
+            document.getElementById("result").textContent = "Please enter only positive numbers.";
+        }
+    }
+</script>
+
+</body>
+</html>

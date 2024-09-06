@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Operations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        button {
+            margin: 5px;
+            padding: 5px 10px;
+            background-color: black;
+            color: white;
+            font-weight: 600;
+        }
+        #output {
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid #000;
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+<h2> color Operations</h2>
+<button onclick="showFirstColor()">First Color</button>
+<button onclick="changeSecondColor()">Change second color to yellow</button>
+<button onclick="addPurple()">Add Purple</button>
+<button onclick="showAllColors()">Show All Colors</button>
+<div id="output"></div>
+<script>
+    let colors=["red","green","blue"];
+    const showFirstColor=()=>{
+        document.getElementById("output").innerText=colors[0]
+        }
+    const changeSecondColor=()=>{
+        colors[1]="yellow"
+        document.getElementById("output").innerText=colors[1]
+    }
+    const addPurple=()=>{
+        colors.push("purple");
+        document.getElementById("output").innerText=colors[colors.length-1]
+    }
+    const showAllColors=()=>{
+        document.getElementById("output").innerText=colors.join(",");
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #736f6f;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            gap: 20px;
+        }
+        .form-container, .inventory-container {
+            width: 300px;
+            padding: 10px;
+        }
+        .form-container input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .form-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #474545;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .inventory-container ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .inventory-container li {
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            display: flex;
+            flex-direction: column;
+        }
+        .inventory-container button {
+            background-color: #504f4f;
+            color: white;
+            padding: 5px;
+            margin-top: 5px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        h2{
+            color: white;
+        }
+    
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h2>Add/Update Product</h2>
+            <input type="text" id="productId" placeholder="Product ID">
+            <input type="text" id="productName" placeholder="Product Name">
+            <input type="number" id="productPrice" placeholder="Product Price">
+            <input type="number" id="productQuantity" placeholder="Product Quantity">
+            <button id="addProductBtn">Add Product</button>
+            <button id="updateProductBtn" style="display:none;">Save Changes</button>
+        </div>
+
+        <div class="inventory-container">
+            <h2>Inventory</h2>
+            <ul id="inventoryList"></ul>
+        </div>
+    </div>
+
+    <script>
+       
+        let inventory = [
+            { id: '001', name: 'Laptop', price: 45000, quantity: 5 },
+            { id: '002', name: 'Smartphone', price: 25000, quantity: 10 },
+            { id: '003', name: 'Tablet', price: 15000, quantity: 7 }
+        ];
+        let currentProductId = null;
+
+        class Product {
+            constructor(id, name, price, quantity) {
+                this.id = id;
+                this.name = name;
+                this.price = price;
+                this.quantity = quantity;
+            }
+        }
+
+        function displayProducts() {
+            const inventoryList = document.getElementById('inventoryList');
+            inventoryList.innerHTML = '';
+
+            inventory.forEach(product => {
+                const listItem = document.createElement('li');
+                listItem.innerHTML = `
+                    <div class="product-info">
+                        <strong>${product.name}</strong> - ₹${product.price} 
+                        <br>Quantity: ${product.quantity}
+                    </div>
+                    <button class="update" onclick="editProduct('${product.id}')">Update</button>
+                    <button onclick="removeProduct('${product.id}')">Remove</button>
+                `;
+                inventoryList.appendChild(listItem);
+            });
+        }
+
+        function addProduct() {
+            const id = document.getElementById('productId').value;
+            const name = document.getElementById('productName').value;
+            const price = document.getElementById('productPrice').value;
+            const quantity = document.getElementById('productQuantity').value;
+
+            if (id && name && price && quantity) {
+                const newProduct = new Product(id, name, price, quantity);
+                inventory.push(newProduct);
+                displayProducts();
+                clearForm();
+            } else {
+                alert("Please fill out all fields.");
+            }
+        }
+
+        function editProduct(id) {
+            const product = inventory.find(product => product.id === id);
+            if (product) {
+                document.getElementById('productId').value = product.id;
+                document.getElementById('productName').value = product.name;
+                document.getElementById('productPrice').value = product.price;
+                document.getElementById('productQuantity').value = product.quantity;
+                currentProductId = id;
+                document.getElementById('addProductBtn').style.display = 'none';
+                document.getElementById('updateProductBtn').style.display = 'block';
+            }
+        }
+
+        function updateProduct() {
+            const id = document.getElementById('productId').value;
+            const name = document.getElementById('productName').value;
+            const price = document.getElementById('productPrice').value;
+            const quantity = document.getElementById('productQuantity').value;
+
+            if (id && name && price && quantity) {
+                const product = inventory.find(product => product.id === currentProductId);
+                if (product) {
+                    product.id = id;
+                    product.name = name;
+                    product.price = parseFloat(price);
+                    product.quantity = parseInt(quantity);
+                    displayProducts();
+                    clearForm();
+                    document.getElementById('addProductBtn').style.display = 'block';
+                    document.getElementById('updateProductBtn').style.display = 'none';
+                    currentProductId = null;
+                }
+            } else {
+                alert("Please fill out all fields.");
+            }
+        }
+
+        function removeProduct(id) {
+            inventory = inventory.filter(product => product.id !== id);
+            displayProducts();
+        }
+
+        function clearForm() {
+            document.getElementById('productId').value = '';
+            document.getElementById('productName').value = '';
+            document.getElementById('productPrice').value = '';
+            document.getElementById('productQuantity').value = '';
+        }
+
+        document.getElementById('addProductBtn').addEventListener('click', addProduct);
+        document.getElementById('updateProductBtn').addEventListener('click', updateProduct);
+
+        displayProducts();
+    </script>
+</body>
+</html>

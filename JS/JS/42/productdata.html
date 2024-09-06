@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product List with Tax Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f0f0f0;
+        }
+
+        .main {
+            margin: 0 auto;
+            background-color: #525453;
+    
+            width: 600px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            color: #ffffff;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        input {
+            padding: 8px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 8px 12px;
+            margin-top: 8px;
+            color: #ffffff;
+            background-color: #333333;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 300px;
+            transition: background-color 0.3s ease;
+        }
+        .product-item {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .price-with-tax {
+            color: rgb(49, 49, 49);
+            font-weight: bold;
+            width: 120px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="main">
+        <div>
+            <h2>Add Product</h2>
+            <div class="input-group">
+                <input type="text" id="product-name" placeholder="Product Name">
+                <input type="number" id="product-price" placeholder="Product Price">
+                <button id="add-product">Add Product</button>
+            </div>
+        </div>
+
+        <div>
+            <h2>Product List</h2>
+            <div id="product-list">
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const products = [];
+            const taxRate = 0.10;
+
+            function displayProduct(product) {
+                const productList = document.getElementById('product-list');
+
+                const productDiv = document.createElement('div');
+                productDiv.className = 'product-item';
+                productDiv.innerHTML = `
+                <span>${product.name} - ₹${product.price}</span>
+                <button class="calculate-tax">Calculate Price with Tax</button>
+                <div class="price-with-tax"></div> `;
+
+                productList.appendChild(productDiv);
+                productDiv.querySelector('.calculate-tax').addEventListener('click', function () {
+                    const priceWithTax = (product.price * (1 + taxRate)).toFixed(2);
+                    productDiv.querySelector('.price-with-tax').textContent = `Price with Tax: ₹${priceWithTax}`;
+                });
+            }
+
+            document.getElementById('add-product').addEventListener('click', function () {
+                const name = document.getElementById('product-name').value;
+                const price = parseFloat(document.getElementById('product-price').value);
+
+                if (name && price) {
+                    const newProduct = { name, price };
+                    products.push(newProduct);
+                    displayProduct(newProduct);
+
+                    document.getElementById('product-name').value = '';
+                    document.getElementById('product-price').value = '';
+                } else {
+                    alert('Please enter both name and price.');
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>

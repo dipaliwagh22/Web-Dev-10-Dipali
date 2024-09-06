@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Array Operations</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .main {
+            max-width: 500px;
+            background-color: rgb(107, 109, 109);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: white;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        label {
+            color: white;
+            display: block;
+            margin-bottom: 5px;
+        }
+        input {
+            width: calc(100% - 22px);
+            padding: 10px;
+            border-radius: 4px;
+            border: none;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            color: white;
+            background-color: rgb(85, 83, 83);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: rgb(65, 63, 63);
+        }
+        #result {
+            color: white;
+            font-size: 16px;
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main">
+        <h2>Array Operations</h2>
+    
+        <div class="input-group">
+            <label for="arrayInput">Enter Array:</label>
+            <input type="text" id="arrayInput" placeholder="e.g., 1,2,3,4,5">
+        </div>
+    
+        <div class="input-group">
+            <button onclick="applyForEach()">Apply forEach (Double Each Element)</button>
+        </div>
+    
+        <div class="input-group">
+            <button onclick="applyMap()">Apply map (Square Each Element)</button>
+        </div>
+    
+        <div class="input-group">
+            <button onclick="applyFilter()">Apply filter (Keep Even Elements)</button>
+        </div>
+    
+        <div id="result"></div>
+    </div>
+    
+    <script>
+        function applyForEach() {
+            const array = document.getElementById("arrayInput").value.split(',').map(Number);
+            let result = [];
+            array.forEach(item => result.push(item * 2));
+            document.getElementById("result").textContent = "forEach Result: " + result;
+        }
+    
+        function applyMap() {
+            const array = document.getElementById("arrayInput").value.split(',').map(Number);
+            const result = array.map(item => item * item);
+            document.getElementById("result").textContent = "map Result: " + result;
+        }
+    
+        function applyFilter() {
+            const array = document.getElementById("arrayInput").value.split(',').map(Number);
+            const result = array.filter(item => item % 2 === 0);
+            document.getElementById("result").textContent = "filter Result: " + result;
+        }
+    </script>
+    
+</body>
+</html>

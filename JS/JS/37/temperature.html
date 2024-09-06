@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Operations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        input {
+            margin: 5px;
+            padding: 5px 10px;
+        }
+
+        button {
+            margin: 5px;
+            padding: 5px 10px;
+            background-color: #393838;
+            color: white;
+            font-weight: 500;
+
+        }
+
+        #output {
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid #000;
+            width: 300px;
+        }
+
+        .main {
+            background-color: rgb(225, 251, 242);
+            width: 400px;
+            height: 400px;
+            margin-left: 35%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="main">
+        <h2>Temperature Operations</h2>
+
+        <label for="arrayInput">Enter temperatures:</label>
+        <input type="text" id="arrayInput" placeholder="e.g., -3,14,22,5,-10">
+        <button onclick="saveInput()">Save Input</button>
+        <br>
+        <button onclick="showTemperatures()">Show Temperatures</button>
+        <button onclick="convertToFahrenheit()">Convert to Fahrenheit</button>
+        <button onclick="filterBelowFreezing()">Filter Below Freezing</button>
+
+        <div id="output"></div>
+
+    </div>
+    <script>
+        let temperatures = [];
+        const saveInput=()=>{
+            const input = document.getElementById("arrayInput").value;
+            temperatures = input.split(',').map(Number);
+            document.getElementById("output").innerText = "Temperatures saved";
+            if (temperatures.some(isNaN)){
+                document.getElementById("output").innerText="please enter valid temperature"
+                console.log(temperatures.some(isNaN))
+            }
+        }
+
+       const showTemperatures=() =>{
+            let result = temperatures.join(', ');
+            document.getElementById("output").innerText = `Temperatures: ${result}`;
+        }
+
+       const convertToFahrenheit=()=> {
+            let fahrenheitTemps = temperatures.map(temp => (temp * 9 / 5) + 32);
+            document.getElementById("output").innerText = `Temperatures in Fahrenheit: ${fahrenheitTemps}`;
+        }
+
+       const filterBelowFreezing=()=> {
+            let belowFreezing = temperatures.filter(temp => temp < 0);
+            document.getElementById("output").innerText = `Below Freezing: ${belowFreezing}`;
+        }
+    </script>
+
+</body>
+
+</html>

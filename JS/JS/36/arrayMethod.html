@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array Operations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        button{
+            margin: 5px;
+            padding: 5px 10px;
+            background-color: #000;
+            color: white;
+            font-weight: 500;
+
+        }
+        #output {
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid #000;
+            width: 300px;
+        }
+        .main{
+            background-color: rgb(225, 251, 242);
+            width: 400px;
+            height: 400px;
+            margin-left: 35%;
+        }
+    </style>
+</head>
+<body>
+
+   <div class="main">
+    <h2>Array Operations</h2>
+
+    <button onclick="showNumbers()">Show Numbers</button>
+    <button onclick="doubleNumbers()">Double Numbers</button>
+    <button onclick="squareNumbers()">Square Numbers</button>
+    <button onclick="filterEvenNumbers()">Filter Even Numbers</button>
+
+    <div id="output"></div>
+   </div>
+
+    <script>
+        let numbers = [1, 2, 3, 4, 5];
+
+        const showNumbers=()=> {
+            let result = numbers.join(', ');
+            document.getElementById("output").innerText = `Numbers: ${result}`;
+          
+        }
+
+        const doubleNumbers=()=> {
+            let doubledNumbers = numbers.map(number => number * 2);
+            document.getElementById("output").innerText = `Doubled Numbers: ${doubledNumbers}`;
+        }
+
+        const squareNumbers=()=> {
+            let squaredNumbers = numbers.map(number => number * number);
+            document.getElementById("output").innerText = `Squared Numbers: ${squaredNumbers}`;
+        }
+
+        const filterEvenNumbers=()=>{
+            let evenNumbers = numbers.filter(number => number % 2 === 0);
+            document.getElementById("output").innerText = `Even Numbers: ${evenNumbers}`;
+        }
+    </script>
+
+</body>
+</html>

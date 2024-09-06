@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array Operations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        input {
+            margin: 5px;
+            padding: 5px 10px;
+
+        }
+
+        button {
+            margin: 5px;
+            padding: 5px 10px;
+            background-color: #000;
+            color: white;
+            font-weight: 500;
+
+        }
+
+        #output {
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid #000;
+            width: 300px;
+        }
+
+        .main {
+            background-color: rgb(225, 251, 242);
+            width: 400px;
+            height: 400px;
+            margin-left: 35%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+
+        <h2>Array Operations</h2>
+
+        <label for="arrayInput">Enter numbers:</label>
+        <input type="text" id="arrayInput" placeholder="e.g., 1,2,3,4,5">
+        <button onclick="saveInput()">Save Input</button>
+        <br>
+        <button onclick="showNumbers()">Show Numbers</button>
+        <button onclick="doubleNumbers()">Double Numbers</button>
+        <button onclick="squareNumbers()">Square Numbers</button>
+        <button onclick="filterEvenNumbers()">Filter Even Numbers</button>
+
+        <div id="output"></div>
+
+    </div>
+    <script>
+        let numbers = [];
+        const saveInput=()=>{
+            const input=document.getElementById("arrayInput").value;
+            numbers=input.split(',').map(Number);
+            if (numbers.some(isNaN)){
+                document.getElementById("output").innerText="please enter valid numbers";
+                console.log(numbers.some(isNaN))
+            }
+        }
+
+        const showNumbers=()=>{
+            document.getElementById("output").innerText = `Numbers: ${numbers}`;
+        }
+
+        const doubleNumbers=()=>{
+            let doubled = numbers.map(number => number * 2);
+            document.getElementById("output").innerText = `Doubled Numbers: ${doubled}`;
+        }
+
+        const squareNumbers=()=>{
+            let squared = numbers.map(number => number * number);
+            document.getElementById("output").innerText = `Squared Numbers: ${squared}`;
+        }
+
+        const filterEvenNumbers=()=>{
+            let even = numbers.filter(number => number % 2 === 0);
+            document.getElementById("output").innerText = `Even Numbers: ${even}`;
+        }
+    </script>
+
+</body>
+
+</html>

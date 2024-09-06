@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookstore Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #969292;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            gap: 20px;
+        }
+        .form-container, .inventory-container {
+            width: 300px;
+            padding: 10px;
+        }
+        .form-container input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .form-container button {
+            width: 320px;
+            padding: 10px;
+            background-color: #1f201f;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .inventory-container ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .inventory-container li {
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            display: flex;
+            flex-direction: column;
+        }
+        .inventory-container button {
+            background-color: #272626;
+            color: white;
+            padding: 5px;
+            margin-top: 5px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        h2{
+            color: white;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h2>Add/Update Book</h2>
+            <input type="text" id="id" placeholder="Book ID">
+            <input type="text" id="title" placeholder="Title">
+            <input type="text" id="author" placeholder="Author">
+            <input type="number" id="price" placeholder="Price">
+            <input type="number" id="quantity" placeholder="Quantity">
+            <button id="addBookBtn">Add Book</button>
+            <button id="updateBookBtn" style="display:none;">Save Changes</button>
+        </div>
+
+        <div class="inventory-container">
+            <h2>Inventory</h2>
+            <ul id="inventoryList"></ul>
+        </div>
+    </div>
+
+    <script>
+        
+        let inventory = [];
+        let currentBookId = null;
+
+        class Book {
+            constructor(id, title, author, price, quantity) {
+                this.id = id;
+                this.title = title;
+                this.author = author;
+                this.price = price;
+                this.quantity = quantity;
+            }
+        }
+
+        function displayBooks() {
+            const inventoryList = document.getElementById('inventoryList');
+            inventoryList.innerHTML = '';
+
+            inventory.forEach(book => {
+                const listItem = document.createElement('li');
+                listItem.innerHTML = `
+                    <div class="book-info">
+                        <strong>${book.title}</strong> - ${book.author} ($${book.price}) 
+                        <br>Quantity: ${book.quantity}
+                    </div>
+                    <button class="update" onclick="editBook(${book.id})">Update</button>
+                    <button onclick="removeBook(${book.id})">Remove</button>
+                `;
+                inventoryList.appendChild(listItem);
+            });
+        }
+
+        function addBook() {
+            const id = document.getElementById('id').value;
+            const title = document.getElementById('title').value;
+            const author = document.getElementById('author').value;
+            const price = document.getElementById('price').value;
+            const quantity = document.getElementById('quantity').value;
+
+            if (id && title && author && price && quantity) {
+                const newBook = new Book(id, title, author, parseFloat(price), parseInt(quantity));
+                inventory.push(newBook);
+                displayBooks();
+                clearForm();
+            } else {
+                alert("Please fill out all fields.");
+            }
+        }
+
+       
+        function editBook(id) {
+            const book = inventory.find(book => book.id == id);
+            if (book) {
+                document.getElementById('id').value = book.id;
+                document.getElementById('title').value = book.title;
+                document.getElementById('author').value = book.author;
+                document.getElementById('price').value = book.price;
+                document.getElementById('quantity').value = book.quantity;
+                currentBookId = id;
+                document.getElementById('addBookBtn').style.display = 'none';
+                document.getElementById('updateBookBtn').style.display = 'block';
+            }
+        }
+
+        function updateBook() {
+            const id = document.getElementById('id').value;
+            const title = document.getElementById('title').value;
+            const author = document.getElementById('author').value;
+            const price = document.getElementById('price').value;
+            const quantity = document.getElementById('quantity').value;
+
+            if (id && title && author && price && quantity) {
+                const book = inventory.find(book => book.id == currentBookId);
+                if (book) {
+                    book.id = id;
+                    book.title = title;
+                    book.author = author;
+                    book.price = parseFloat(price);
+                    book.quantity = parseInt(quantity);
+                    displayBooks();
+                    clearForm();
+                    document.getElementById('addBookBtn').style.display = 'block';
+                    document.getElementById('updateBookBtn').style.display = 'none';
+                    currentBookId = null;
+                }
+            } else {
+                alert("Please fill out all fields.");
+            }
+        }
+
+        function removeBook(id) {
+            inventory = inventory.filter(book => book.id != id);
+            displayBooks();
+        }
+
+        function clearForm() {
+            document.getElementById('id').value = '';
+            document.getElementById('title').value = '';
+            document.getElementById('author').value = '';
+            document.getElementById('price').value = '';
+            document.getElementById('quantity').value = '';
+        }
+
+        document.getElementById('addBookBtn').addEventListener('click', addBook);
+        document.getElementById('updateBookBtn').addEventListener('click', updateBook);
+
+        displayBooks();
+    </script>
+</body>
+</html>

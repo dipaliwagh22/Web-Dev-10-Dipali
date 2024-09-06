@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fruit Operations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        input{
+            margin: 5px;
+            padding: 5px 10px;
+        }
+        button {
+            margin: 5px;
+            padding: 5px 10px;
+            background-color: #393838;
+            color: white;
+            font-weight: 500;
+
+        }
+
+        #output {
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid #000;
+            width: 300px;
+        }
+
+        .main {
+            background-color: rgb(225, 251, 242);
+            width: 400px;
+            height: 400px;
+            margin-left: 35%;
+        }
+    </style>
+</head>
+<body>
+<div class="main">
+    
+    <h2>Fruit Operations</h2>
+
+    <label for="arrayInput">Enter fruits:</label>
+    <input type="text" id="arrayInput" placeholder="e.g., apple,banana,cherry,date">
+    <button onclick="saveInput()">Save Input</button>
+
+    <br>
+    <button onclick="showUpperCase()">Show Uppercase Fruits</button>
+    <button onclick="showTotalCharacters()">Show Total Characters</button>
+    <button onclick="showReversedFruits()">Show Reversed Fruits</button>
+    <button onclick="showLongFruits()">Show Long Fruits</button>
+    <button onclick="showAFruitsUpper()">Show Fruits Containing 'a' in Uppercase</button>
+
+    <div id="output"></div>
+</div>
+
+    <script>
+        let fruits = [];
+        function saveInput() {
+            const input = document.getElementById("arrayInput").value;
+            fruits = input.split(',').map(fruit => fruit.trim()); 
+            document.getElementById("output").innerText = "Fruits saved";
+        }
+
+        function showUpperCase() {
+            let result = fruits.map(fruit => fruit.toUpperCase()).join(', ');
+            document.getElementById("output").innerText = `Uppercase Fruits: ${result}`;
+        }
+
+        function showTotalCharacters() {
+            let totalCharacters = 0;
+            fruits.forEach(fruit => totalCharacters += fruit.length);
+            document.getElementById("output").innerText = `Total Characters: ${totalCharacters}`;
+        }
+
+        function showReversedFruits() {
+            let reversedFruits = fruits.map(fruit => fruit.split('').reverse().join(''));
+            document.getElementById("output").innerText = `Reversed Fruits: ${reversedFruits}`;
+        }
+
+        function showLongFruits() {
+            let longFruits = fruits.filter(fruit => fruit.length > 5);
+            document.getElementById("output").innerText = `Long Fruits: ${longFruits}`;
+        }
+
+        function showAFruitsUpper() {
+            let aFruitsUpper = fruits.filter(fruit => fruit.includes('a')).map(fruit => fruit.toUpperCase());
+            document.getElementById("output").innerText = `Fruits Containing 'a' in Uppercase: ${aFruitsUpper}`;
+        }
+    </script>
+
+</body>
+</html>
